@@ -101,4 +101,54 @@ public class UsuarioController {
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping
+    public ResponseEntity<RespuestaListUsuario> listarUsuario() {
+
+        RespuestaListUsuario respuesta = new RespuestaListUsuario();
+
+        try {
+            List<Usuario> usuarios = usuarioService.listarUsuario();
+
+            respuesta.setMensaje("Listado de Usuarios exitoso.");
+            respuesta.setSatisfactorio(true);
+            respuesta.setCodigo("200");
+            respuesta.setData(usuarios);
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            respuesta.setMensaje("failed");
+            respuesta.setSatisfactorio(false);
+            respuesta.setCodigo("400");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @GetMapping("/{idUsuario}")
+    public ResponseEntity<RespuestaUsuario> obtenerUsuarioPorIdUsuario(@PathVariable("idUsuario") Integer idUsuario) {
+
+        RespuestaUsuario respuesta = new RespuestaUsuario();
+
+        try {
+            Usuario usuario = usuarioService.obtenerUsuarioPorIdUsuario(idUsuario);
+
+            respuesta.setMensaje("Usuario encontrado con éxito.");
+            respuesta.setSatisfactorio(true);
+            respuesta.setCodigo("200");
+            respuesta.setData(usuario);
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            respuesta.setMensaje("failed");
+            respuesta.setSatisfactorio(false);
+            respuesta.setCodigo("400");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -23,4 +23,11 @@ public class UsuarioService {
     public void eliminarUsuario(Integer idUsuario) {
         usuarioRepository.deleteById(idUsuario);
     }
+    public List<Usuario> listarUsuario() {
+        return usuarioRepository.findAll();
+    }
+
+    public Usuario obtenerUsuarioPorIdUsuario(Integer idUsuario) {
+        return usuarioRepository.findById(idUsuario).orElse(new Usuario());
+    }
 }
