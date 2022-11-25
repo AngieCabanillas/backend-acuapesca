@@ -1,6 +1,7 @@
 package com.grupoc.acuapescabackend.application.controllers;
 
 import com.grupoc.acuapescabackend.application.dto.RespuestaEquipo;
+import com.grupoc.acuapescabackend.application.dto.RespuestaListEquipo;
 import com.grupoc.acuapescabackend.domain.entities.Equipo;
 import com.grupoc.acuapescabackend.domain.services.EquipoService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/equipo")
@@ -57,6 +59,30 @@ public class EquipoController {
             respuesta.setSatisfactorio(true);
             respuesta.setCodigo("200");
             respuesta.setData(equipoUpdate);
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            respuesta.setMensaje("failed");
+            respuesta.setSatisfactorio(false);
+            respuesta.setCodigo("400");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping
+    public ResponseEntity<RespuestaListEquipo> listarEquipo() {
+
+        RespuestaListEquipo respuesta = new RespuestaListEquipo();
+
+        try {
+            List<Equipo> equipos = equipoService.listarEquipo();
+
+            respuesta.setMensaje("Listado de equipos exitoso.");
+            respuesta.setSatisfactorio(true);
+            respuesta.setCodigo("200");
+            respuesta.setData(equipos);
 
             return new ResponseEntity<>(respuesta, HttpStatus.OK);
 

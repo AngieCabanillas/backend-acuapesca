@@ -20,4 +20,6 @@ public class EquipoService {
 
     public Equipo modificarEquipo(Equipo equipo){ return equipoRepository.save(equipo); }
 
+    public List<Equipo> listarEquipo() { return equipoRepository.findAll(); }
+
 }
