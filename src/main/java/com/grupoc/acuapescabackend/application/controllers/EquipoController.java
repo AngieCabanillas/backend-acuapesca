@@ -71,6 +71,31 @@ public class EquipoController {
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
     }
+    @DeleteMapping("/{idEquipo}")
+    public ResponseEntity<Respuesta> eliminarEquipo(@PathVariable("idEquipo") Integer idEquipo) {
+
+
+        Respuesta respuesta = new Respuesta();
+
+        try {
+
+            equipoService.eliminarEquipo(idEquipo);
+
+            respuesta.setMensaje("Equipo eliminado con éxito");
+            respuesta.setSatisfactorio(true);
+            respuesta.setCodigo("200");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            respuesta.setMensaje("failed");
+            respuesta.setSatisfactorio(false);
+            respuesta.setCodigo("400");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping
     public ResponseEntity<RespuestaListEquipo> listarEquipo() {
 
@@ -95,4 +120,27 @@ public class EquipoController {
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/{idEquipo}")
+    public ResponseEntity<RespuestaEquipo> obtenerEquipoPorIdEquipo(@PathVariable("idEquipo") Integer idEquipo) {
+
+        RespuestaEquipo respuesta = new RespuestaEquipo();
+
+        try {
+            Equipo equipo = equipoService.obtenerEquipoPorIdEquipo(idEquipo);
+
+            respuesta.setMensaje("Equipo encontrado con éxito.");
+            respuesta.setSatisfactorio(true);
+            respuesta.setCodigo("200");
+            respuesta.setData(equipo);
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            respuesta.setMensaje("failed");
+            respuesta.setSatisfactorio(false);
+            respuesta.setCodigo("400");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+        }
 }

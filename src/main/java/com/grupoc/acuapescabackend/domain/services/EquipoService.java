@@ -20,6 +20,13 @@ public class EquipoService {
 
     public Equipo modificarEquipo(Equipo equipo){ return equipoRepository.save(equipo); }
 
+    public void eliminarEquipo(Integer idEquipo) {
+        equipoRepository.deleteById(idEquipo);
+    }
+
     public List<Equipo> listarEquipo() { return equipoRepository.findAll(); }
 
+    public Equipo obtenerEquipoPorIdEquipo(Integer idEquipo) {
+        return equipoRepository.findById(idEquipo).orElse(new Equipo());
+    }
 }
