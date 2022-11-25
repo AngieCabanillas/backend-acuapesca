@@ -4,6 +4,8 @@ import com.grupoc.acuapescabackend.domain.entities.Usuario;
 import com.grupoc.acuapescabackend.domain.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;

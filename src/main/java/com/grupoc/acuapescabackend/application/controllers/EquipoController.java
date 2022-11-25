@@ -1,5 +1,6 @@
 package com.grupoc.acuapescabackend.application.controllers;
 
+import com.grupoc.acuapescabackend.application.dto.Respuesta;
 import com.grupoc.acuapescabackend.application.dto.RespuestaEquipo;
 import com.grupoc.acuapescabackend.application.dto.RespuestaListEquipo;
 import com.grupoc.acuapescabackend.domain.entities.Equipo;
@@ -121,7 +122,7 @@ public class EquipoController {
         }
     }
     @GetMapping("/{idEquipo}")
-    public ResponseEntity<RespuestaEquipo> obtenerEquipoPorIdEquipo(@PathVariable("idEquipo") Integer idEquipo) {
+    public ResponseEntity<RespuestaEquipo> obtenerEquipoPorIdEquipo(@PathVariable("idEquipo") Integer idEquipo)     {
 
         RespuestaEquipo respuesta = new RespuestaEquipo();
 
@@ -143,4 +144,5 @@ public class EquipoController {
 
             return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
+    }
 }
