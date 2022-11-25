@@ -1,11 +1,11 @@
 package com.grupoc.acuapescabackend.domain.entities;
 
-import jakarta.persistence.*;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
 @Entity
 @Table(name="usuarios")
