@@ -18,4 +18,6 @@ public class EquipoService {
         return equipoRepository.save(equipo);
     }
 
+    public Equipo modificarEquipo(Equipo equipo){ return equipoRepository.save(equipo); }
+
 }

@@ -5,10 +5,7 @@ import com.grupoc.acuapescabackend.domain.entities.Equipo;
 import com.grupoc.acuapescabackend.domain.services.EquipoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,6 +33,30 @@ public class EquipoController {
             respuesta.setSatisfactorio(true);
             respuesta.setCodigo("200");
             respuesta.setData(equipoNew);
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            respuesta.setMensaje("failed");
+            respuesta.setSatisfactorio(false);
+            respuesta.setCodigo("400");
+
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PutMapping
+    public ResponseEntity<RespuestaEquipo> modificarEquipo(@Valid @RequestBody Equipo equipo) {
+
+        RespuestaEquipo respuesta = new RespuestaEquipo();
+
+        try {
+            Equipo equipoUpdate = equipoService.modificarEquipo(equipo);
+
+            respuesta.setMensaje("Equipo modificado con éxito.");
+            respuesta.setSatisfactorio(true);
+            respuesta.setCodigo("200");
+            respuesta.setData(equipoUpdate);
 
             return new ResponseEntity<>(respuesta, HttpStatus.OK);
 
